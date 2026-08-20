@@ -17,16 +17,16 @@
         GM_addStyle('header.MuiAppBar-root, header { display: none !important; }');
 
         GM_addStyle(`
-            ins.adsbygoogle, 
-            iframe[title="Advertisement"], 
-            iframe[id^="aswift_"], 
-            iframe#google_esf, 
-            .MuiBox-root:has(> ins.adsbygoogle) { 
-                display: none !important; 
-                width: 0 !important; 
-                height: 0 !important; 
+            ins.adsbygoogle,
+            iframe[title="Advertisement"],
+            iframe[id^="aswift_"],
+            iframe#google_esf,
+            .MuiBox-root:has(> ins.adsbygoogle) {
+                display: none !important;
+                width: 0 !important;
+                height: 0 !important;
             }
-            
+
             /* Pointer events iframe kaynaklı takılmaları engellemek için */
             .is-dragging iframe {
                 pointer-events: none !important;
@@ -36,10 +36,10 @@
 
     if (window.location.hostname === 'player.angelthump.com' || window.location.hostname === 'angelthump.com') {
         GM_addStyle(`
-            a[href*="patreon.com/join/angelthump"], 
-            [class*="patreon"], 
-            [id*="patreon"] { 
-                display: none !important; 
+            a[href*="patreon.com/join/angelthump"],
+            [class*="patreon"],
+            [id*="patreon"] {
+                display: none !important;
             }
         `);
     }
@@ -67,7 +67,7 @@
 
     // 3. Twitch Chati, Boyutlandirma ve Gecikme Sayaci Ekleme (Ana Sayfa)
     if (window.location.hostname === 'angelthump.com') {
-        
+
         // --- YAYIN GECIKMESI SAYACI (DELAY) ---
         let currentDelay = 0;
         let delayCounter = null;
@@ -104,7 +104,7 @@
             if (delayCounter) {
                 // Eger buton "Esitleniyor..." modundaysa ve gecikme 1.5'in altina dustuyse normal moda gec
                 if (delayCounter.innerText === "Esitleniyor..." && currentDelay < 1.5) {
-                    delayCounter.innerText = ""; 
+                    delayCounter.innerText = "";
                 }
 
                 if (delayCounter.innerText !== "Esitleniyor...") {
@@ -176,7 +176,7 @@
                             transition: opacity 0.3s ease !important;
                             position: relative !important;
                         }
-                        
+
                         /* Tam Ekran Butonu CSS */
                         #at-fullscreen-btn {
                             background: rgba(0, 0, 0, 0.6);
@@ -200,7 +200,7 @@
                         #at-fullscreen-btn:hover {
                             background: rgba(0, 0, 0, 0.8);
                         }
-                        
+
                         /* Dikey Mod (Portrait) veya Mobil Ekranlar İçin */
                         @media (orientation: portrait), (max-width: 768px) {
                             #at-main-container {
@@ -259,7 +259,7 @@
                             document.exitFullscreen();
                         }
                     };
-                    
+
                     // DOM'a ekleme
                     mainContainer.appendChild(resizer);
                     mainContainer.appendChild(chatContainer);
@@ -267,7 +267,7 @@
                     // Hedef elementi bekleyip butonu ekleyen interval
                     const fsInterval = setInterval(() => {
                         const targetBox = document.querySelector('.MuiBox-root.css-1n2mv2k');
-                        
+
                         if (targetBox) {
                             if (!document.getElementById('at-fullscreen-btn')) {
                                 targetBox.appendChild(fsBtn);
@@ -307,16 +307,16 @@
 
                     const onDrag = (e) => {
                         if (!isDragging) return;
-                        
+
                         let clientX = e.type.includes('touch') ? e.touches[0].clientX : e.clientX;
-                        
+
                         // Sağdan itibaren fare pozisyonunu hesapla
                         let newWidth = window.innerWidth - clientX;
-                        
+
                         // Minimum ve maksimum genişlik sinirlari
                         if (newWidth < 200) newWidth = 200;
                         if (newWidth > window.innerWidth * 0.7) newWidth = window.innerWidth * 0.7; // En fazla %70
-                        
+
                         chatContainer.style.setProperty('--chat-width', newWidth + 'px');
                     };
 
@@ -328,7 +328,7 @@
                             isDragging = false;
                             document.body.classList.remove('is-dragging');
                             document.body.style.cursor = 'default';
-                            
+
                             // Gizleme timer'ini tekrar başlat
                             showResizer();
                         }
